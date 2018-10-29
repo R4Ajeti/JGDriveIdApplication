@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 public class JGDriveId {
-    private String jgsource=null;
+    public String jgsource=null;
     public String JDriveId(String gurl) throws UnsupportedEncodingException, MalformedURLException {
         String gid, start, end=""; int ini,len; Map<String, String> parts;
         int i1 = gurl.indexOf("/edit");
@@ -60,78 +60,38 @@ public class JGDriveId {
 
         String gurlN="https://drive.google.com/uc?export=download&id=" + gid;
 
-        //if(Build.VERSION.SDK_INT >= 11/*HONEYCOMB*/) {
-        /*    new MyTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        } else {
-            new MyTask().execute();
+        new MyTask(gurlN).execute();
+        int i = 0;
+        while( !isJGSourceUpOrDown(this) ) {
+            i++;
+            System.out.println("Vlera i-se: " + i);
         }
 
-        new MyTask().execute();*/
-
-
-        /*new AsyncTask<String, Void, Void>() {
-            /*
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-
-            }*//*
-            @Override
-            protected String doInBackground(String gurlN) {
-                //Log.v("AsyncTask", "doInBackground");
-                //String msg = "";
-
-                String firstPartText="", secondPartText="";
-                URL textUrl;
-
-                try{
-                    textUrl = new URL(gurlN);
-                    InputStream inStream = textUrl.openStream();
-                    InputStreamReader inStrReader = new InputStreamReader(inStream);
-                    BufferedReader bufferReader = new BufferedReader(inStrReader);
-                    String stringbuffer;
-                    String stringText = ""; int i=0;
-                    while((stringbuffer = bufferReader.readLine()) != null){
-                        int lenA= firstPartText.length();//41155
-                        int lenB= secondPartText.length();
-                        int lenC= stringbuffer.length();//200000
-                        if(lenC<200000&&lenA<41155){
-                            firstPartText += stringbuffer;
-                            System.out.println("Iterimi if: "+i+" gjatesia: 1part-"+lenA+" 2part-"+lenB+" sbuffer-"+lenC);
-                        }
-                        else{
-                            System.out.println("Iterimi else: "+i+" gjatesia: 1part-"+lenA+" 2part-"+lenB+" sbuffer-"+lenC);
-                            secondPartText += stringbuffer; }
-                        i++;
-                    }
-
-                    System.out.println("Vlera i-se: "+i+"textResult10:  -First Part- "+firstPartText);
-                    System.out.println(" -Second Part- "+secondPartText +" -FUND");
-                    stringText = firstPartText+secondPartText;
-                    bufferReader.close();
-                    jgsource = stringText;
-                    System.out.println("textResult9: -First Part-"+firstPartText+" -Second Part- "+secondPartText +" -FUND");
-
-                }catch(MalformedURLException e){
-                    e.printStackTrace();
-                    jgsource =e.toString();
-                }catch(IOException e){
-                    e.printStackTrace();
-                    jgsource =e.toString();
-                }
-
-
-                return jgsource;
-            }
-            /*@Override
-            protected void onPostExecute(String msg) {
-
-
-            }*//*
-        }.execute(null);*/
-
-
         return jgsource;
+    }
+
+    public boolean isJGSourceUp(JGDriveId jGDriveObject){
+        boolean jgsup=false;
+        if(!(jGDriveObject.jgsource==null)) {
+            System.out.println("jGSourceN4000--" + jGDriveObject.jgsource + "--3--");
+            jgsup=true;
+        }
+        else{
+            isJGSourceUp(jGDriveObject);
+        }
+        return jgsup;
+    }
+
+    public boolean isJGSourceUpOrDown(JGDriveId jGDriveObject){
+        boolean jgsup=false;
+        if(!(jGDriveObject.jgsource==null)) {
+            System.out.println("jGSourceN3000--" + jGDriveObject.jgsource + "--3--");
+            jgsup = true;
+        }
+        else{
+            jgsup = false;
+        }
+        return jgsup;
     }
 
 
@@ -265,4 +225,72 @@ public class JGDriveId {
             super.onPostExecute(aVoid);
         }
     }*/
+
+    private class MyTask extends AsyncTask<Void, Void, Void>{
+        private String gurlN=null;
+
+        public MyTask(){
+            gurlN="https://drive.google.com/uc?export=download&id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY";
+        }
+
+        public MyTask(String gurl){
+            gurlN=gurl;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            String firstPartText="", secondPartText="";
+            URL textUrl;
+
+            try{
+                textUrl = new URL(gurlN);
+                InputStreamReader inStrReader = new InputStreamReader(textUrl.openStream());
+                BufferedReader bufferReader = new BufferedReader(inStrReader);
+                String stringbuffer;
+                String stringText = ""; int i=0;
+                while((stringbuffer = bufferReader.readLine()) != null){
+                    int lenA= firstPartText.length();//41155
+                    int lenB= secondPartText.length();
+                    int lenC= stringbuffer.length();//200000
+                    if(lenC<20000&&lenA<41155){
+                        firstPartText += stringbuffer;
+                    }
+                    else{
+                        secondPartText += stringbuffer; }
+                    i++;
+                }
+
+                System.out.println("Vlera i-se: "+i+"textResult10:  -First Part- "+firstPartText);
+                System.out.println(" -Second Part- "+secondPartText +" -FUND");
+                stringText = firstPartText+secondPartText;
+                bufferReader.close();
+                jgsource = stringText;
+                System.out.println("textResult9: -First Part-"+firstPartText+" -Second Part- "+secondPartText +" -FUND");
+
+            }catch(MalformedURLException e){
+                e.printStackTrace();
+                jgsource =e.toString();
+            }catch(IOException e){
+                e.printStackTrace();
+                jgsource =e.toString();
+            }
+            System.out.println("jGSourceN--" + jgsource + "--3--");
+            return null;
+        }
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            //N.s(MainActivity.this, "All Items were added succesfully");
+            //textMsg.setText(jgsource);
+            //textPrompt.setText("Finished");
+            MainActivity.updateLogcat(jgsource);
+            super.onPostExecute(aVoid);
+        }
+    }
 }

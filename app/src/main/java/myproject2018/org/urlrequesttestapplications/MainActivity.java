@@ -50,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     //Android Play Video From URL Using VideoView Example
-    VideoView video;
-    String video_url = "http://download.itcuties.com/teaser/itcuties-teaser-480.mp4";
-    ProgressDialog pd;
+    private VideoView video;
+    private String video_url = "http://download.itcuties.com/teaser/itcuties-teaser-480.mp4";
+    private ProgressDialog pd;
 
-    TextView textMsg, textPrompt;
-    String jgsource=null;
+    private TextView textMsg, textPrompt;
+    private String jgsource=null;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -96,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
         textMsg.setMovementMethod(new ScrollingMovementMethod());
 
         textPrompt.setText("Wait...");
-        new MyTask().execute();
+        String gurlN="https://drive.google.com/uc?export=download&id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY";
+        //new MyTask(gurlN).execute();
+        String t1=jgsource;
 
         //play a video from relative path(existing local file)
         VideoView video =(VideoView) findViewById(R.id.VideoView1);
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             String gid=jGDriveObject.JDriveId(gurl);
             System.out.println("idijaa4--"+gid);
 
-            //String jgsource1=jGDriveObject.jGSource(gid);
+            String jgsource=jGDriveObject.jGSource(gid);
             System.out.println("jGSource--" + jgsource + "--3--");
 
             String jgsource2="<!DOCTYPE html><html><head><title>Google Drive - Virus scan warning</title><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/><link href=&#47;static&#47;doclist&#47;client&#47;css&#47;2794100970&#45;untrustedcontent.css rel=\"stylesheet\"><style nonce=\"7+QFZRHv3R6ExbW03Ty1Jg458l4\">#gb{font:13px/27px Arial,sans-serif;height:30px}#gbz,#gbg{position:absolute;white-space:nowrap;top:0;height:30px;z-index:1000}#gbz{left:0;padding-left:4px}#gbg{right:0;padding-right:5px}#gbs{background:transparent;position:absolute;top:-999px;visibility:hidden;z-index:998;right:0}.gbto #gbs{background:#fff}#gbx3,#gbx4{background-color:#2d2d2d;background-image:none;_background-image:none;background-position:0 -138px;background-repeat:repeat-x;border-bottom:1px solid #000;font-size:24px;height:29px;_height:30px;opacity:1;filter:alpha(opacity=100);position:absolute;top:0;width:100%;z-index:990}#gbx3{left:0}#gbx4{right:0}#gbb{position:relative}#gbbw{left:0;position:absolute;top:30px;width:100%}.gbtcb{position:absolute;visibility:hidden}#gbz .gbtcb{right:0}#gbg .gbtcb{left:0}.gbxx{display:none !important}.gbxo{opacity:0 !important;filter:alpha(opacity=0) !important}.gbm{position:absolute;z-index:999;top:-999px;visibility:hidden;text-align:left;border:1px solid #bebebe;background:#fff;-moz-box-shadow:-1px 1px 1px rgba(0,0,0,.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,.2);box-shadow:0 2px 4px rgba(0,0,0,.2)}.gbrtl .gbm{-moz-box-shadow:1px 1px 1px rgba(0,0,0,.2)}.gbto .gbm,.gbto #gbs{top:29px;visibility:visible}#gbz .gbm{left:0}#gbg .gbm{right:0}.gbxms{background-color:#ccc;display:block;position:absolute;z-index:1;top:-1px;left:-2px;right:-2px;bottom:-2px;opacity:.4;-moz-border-radius:3px;filter:progid:DXImageTransform.Microsoft.Blur(pixelradius=5);*opacity:1;*top:-2px;*left:-5px;*right:5px;*bottom:4px;-ms-filter:\"progid:DXImageTransform.Microsoft.Blur(pixelradius=5)\";opacity:1\\0/;top:-4px\\0/;left:-6px\\0/;right:5px\\0/;bottom:4px\\0/}.gbma{position:relative;top:-1px;border-style:solid dashed dashed;border-color:transparent;border-top-color:#c0c0c0;display:-moz-inline-box;display:inline-block;font-size:0;height:0;line-height:0;width:0;border-width:3px 3px 0;padding-top:1px;left:4px}#gbztms1,#gbi4m1,#gbi4s,#gbi4t{zoom:1}.gbtc,.gbmc,.gbmcc{display:block;list-style:none;margin:0;padding:0}.gbmc{background:#fff;padding:10px 0;position:relative;z-index:2;zoom:1}.gbt{position:relative;display:-moz-inline-box;display:inline-block;line-height:27px;padding:0;vertical-align:top}.gbt{*display:inline}.gbto{box-shadow:0 2px 4px rgba(0,0,0,.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,.2)}.gbzt,.gbgt{cursor:pointer;display:block;text-decoration:none !important}span#gbg6,span#gbg4{cursor:default}.gbts{border-left:1px solid transparent;border-right:1px solid transparent;display:block;*display:inline-block;padding:0 5px;position:relative;z-index:1000}.gbts{*display:inline}.gbzt .gbts{display:inline;zoom:1}.gbto .gbts{background:#fff;border-color:#bebebe;color:#36c;padding-bottom:1px;padding-top:2px}.gbz0l .gbts{color:#fff;font-weight:bold}.gbtsa{padding-right:9px}#gbz .gbzt,#gbz .gbgt,#gbg .gbgt{color:#ccc!important}.gbtb2{display:block;border-top:2px solid transparent}.gbto .gbzt .gbtb2,.gbto .gbgt .gbtb2{border-top-width:0}.gbtb .gbts{background:url(https://ssl.gstatic.com/gb/images/b_8d5afc09.png);_background:url(https://ssl.gstatic.com/gb/images/b8_3615d64d.png);background-position:-27px -22px;border:0;font-size:0;padding:29px 0 0;*padding:27px 0 0;width:1px}.gbzt:hover,.gbzt:focus,.gbgt-hvr,.gbgt:focus{background-color:#4c4c4c;background-image:none;_background-image:none;background-position:0 -102px;background-repeat:repeat-x;outline:none;text-decoration:none !important}.gbpdjs .gbto .gbm{min-width:99%}.gbz0l .gbtb2{border-top-color:#dd4b39!important}#gbi4s,#gbi4s1{font-weight:bold}#gbg6.gbgt-hvr,#gbg6.gbgt:focus{background-color:transparent;background-image:none}.gbg4a{font-size:0;line-height:0}.gbg4a .gbts{padding:27px 5px 0;*padding:25px 5px 0}.gbto .gbg4a .gbts{padding:29px 5px 1px;*padding:27px 5px 1px}#gbi4i,#gbi4id{left:5px;border:0;height:24px;position:absolute;top:1px;width:24px}.gbto #gbi4i,.gbto #gbi4id{top:3px}.gbi4p{display:block;width:24px}#gbi4id{background-position:-44px -101px}#gbmpid{background-position:0 0}#gbmpi,#gbmpid{border:none;display:inline-block;height:48px;width:48px}#gbmpiw{display:inline-block;line-height:9px;padding-left:20px;margin-top:10px;position:relative}#gbmpi,#gbmpid,#gbmpiw{*display:inline}#gbg5{font-size:0}#gbgs5{padding:5px !important}.gbto #gbgs5{padding:7px 5px 6px !important}#gbi5{background:url(https://ssl.gstatic.com/gb/images/b_8d5afc09.png);_background:url(https://ssl.gstatic.com/gb/images/b8_3615d64d.png);background-position:0 0;display:block;font-size:0;height:17px;width:16px}.gbto #gbi5{background-position:-6px -22px}.gbn .gbmt,.gbn .gbmt:visited,.gbnd .gbmt,.gbnd .gbmt:visited{color:#dd8e27 !important}.gbf .gbmt,.gbf .gbmt:visited{color:#900 !important}.gbmt,.gbml1,.gbmlb,.gbmt:visited,.gbml1:visited,.gbmlb:visited{color:#36c !important;text-decoration:none !important}.gbmt,.gbmt:visited{display:block}.gbml1,.gbmlb,.gbml1:visited,.gbmlb:visited{display:inline-block;margin:0 10px}.gbml1,.gbmlb,.gbml1:visited,.gbmlb:visited{*display:inline}.gbml1,.gbml1:visited{padding:0 10px}.gbml1-hvr,.gbml1:focus{outline:none;text-decoration:underline !important}#gbpm .gbml1{display:inline;margin:0;padding:0;white-space:nowrap}.gbmlb,.gbmlb:visited{line-height:27px}.gbmlb-hvr,.gbmlb:focus{outline:none;text-decoration:underline !important}.gbmlbw{color:#ccc;margin:0 10px}.gbmt{padding:0 20px}.gbmt:hover,.gbmt:focus{background:#eee;cursor:pointer;outline:0 solid black;text-decoration:none !important}.gbm0l,.gbm0l:visited{color:#000 !important;font-weight:bold}.gbmh{border-top:1px solid #bebebe;font-size:0;margin:10px 0}#gbd4 .gbmc{background:#f5f5f5;padding-top:0}#gbd4 .gbsbic::-webkit-scrollbar-track:vertical{background-color:#f5f5f5;margin-top:2px}#gbmpdv{background:#fff;border-bottom:1px solid #bebebe;-moz-box-shadow:0 2px 4px rgba(0,0,0,.12);-o-box-shadow:0 2px 4px rgba(0,0,0,.12);-webkit-box-shadow:0 2px 4px rgba(0,0,0,.12);box-shadow:0 2px 4px rgba(0,0,0,.12);position:relative;z-index:1}#gbd4 .gbmh{margin:0}.gbmtc{padding:0;margin:0;line-height:27px}.GBMCC:last-child:after,#GBMPAL:last-child:after{content:'\\0A\\0A';white-space:pre;position:absolute}#gbmps{*zoom:1}#gbd4 .gbpc,#gbmpas .gbmt{line-height:17px}#gbd4 .gbpgs .gbmtc{line-height:27px}#gbd4 .gbmtc{border-bottom:1px solid #bebebe}#gbd4 .gbpc{display:inline-block;margin:16px 0 10px;padding-right:50px;vertical-align:top}#gbd4 .gbpc{*display:inline}.gbpc .gbps,.gbpc .gbps2{display:block;margin:0 20px}#gbmplp.gbps{margin:0 10px}.gbpc .gbps{color:#000;font-weight:bold}.gbpc .gbpd{margin-bottom:5px}.gbpd .gbmt,.gbpd .gbps{color:#666 !important}.gbpd .gbmt{opacity:.4;filter:alpha(opacity=40)}.gbps2{color:#666;display:block}.gbp0{display:none}.gbp0 .gbps2{font-weight:bold}#gbd4 .gbmcc{margin-top:5px}.gbpmc{background:#fef9db}.gbpmc .gbpmtc{padding:10px 20px}#gbpm{border:0;*border-collapse:collapse;border-spacing:0;margin:0;white-space:normal}#gbpm .gbpmtc{border-top:none;color:#000 !important;font:11px Arial,sans-serif}#gbpms{*white-space:nowrap}.gbpms2{font-weight:bold;white-space:nowrap}#gbmpal{*border-collapse:collapse;border-spacing:0;border:0;margin:0;white-space:nowrap;width:100%}.gbmpala,.gbmpalb{font:13px Arial,sans-serif;line-height:27px;padding:10px 20px 0;white-space:nowrap}.gbmpala{padding-left:0;text-align:left}.gbmpalb{padding-right:0;text-align:right}#gbmpasb .gbps{color:#000}#gbmpal .gbqfbb{margin:0 20px}.gbp0 .gbps{*display:inline}a.gbiba{margin:8px 20px 10px}.gbmpiaw{display:inline-block;padding-right:10px;margin-bottom:6px;margin-top:10px}.gbxv{visibility:hidden}.gbmpiaa{display:block;margin-top:10px}.gbmpia{border:none;display:block;height:48px;width:48px}.gbmpnw{display:inline-block;height:auto;margin:10px 0;vertical-align:top}\n" +
@@ -188,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                     "(function(){try{window.gbar.rdl();}catch(e){window.gbar&&gbar.logger&&gbar.logger.ml(e,{\"_sn\":\"cfg.init\"});}})();\n" +
                     "</script><link rel=\"icon\" href=\"https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_4.ico\"/></head><body><div id=gb><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>window.gbar&&gbar.eli&&gbar.eli()</script><div id=gbw><div id=gbz><span class=gbtcb></span><ol id=gbzc class=gbtc><li class=gbt><a target=_blank class=gbzt id=gb_119 href=\"https://plus.google.com/?gpsrc=ogpy0&tab=oX\"><span class=gbtb2></span><span class=gbts>Google+</span></a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_119').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:119}); });</script></li><li class=gbt><a target=_blank class=gbzt id=gb_1 href=\"https://www.google.com/webhp?tab=ow\"><span class=gbtb2></span><span class=gbts>Search</span></a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_1').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:1}); });</script></li><li class=gbt><a target=_blank class=gbzt id=gb_2 href=\"http://www.google.com/imghp?hl=en&tab=oi\"><span class=gbtb2></span><span class=gbts>Images</span></a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_2').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:2}); });</script></li><li class=gbt><a target=_blank class=gbzt id=gb_8 href=\"https://maps.google.com/maps?hl=en&tab=ol\"><span class=gbtb2></span><span class=gbts>Maps</span></a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_8').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:8}); });</script></li><li class=gbt><a target=_blank class=gbzt id=gb_78 href=\"https://play.google.com/?hl=en&tab=o8\"><span class=gbtb2></span><span class=gbts>Play</span></a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_78').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:78}); });</script></li><li class=gbt><a target=_blank class=gbzt id=gb_36 href=\"https://www.youtube.com/?gl=US&tab=o1\"><span class=gbtb2></span><span class=gbts>YouTube</span></a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_36').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:36}); });</script></li><li class=gbt><a target=_blank class=gbzt id=gb_5 href=\"https://news.google.com/nwshp?hl=en&tab=on\"><span class=gbtb2></span><span class=gbts>News</span></a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_5').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:5}); });</script></li><li class=gbt><a target=_blank class=gbzt id=gb_23 href=\"https://mail.google.com/mail/?tab=om\"><span class=gbtb2></span><span class=gbts>Gmail</span></a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_23').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:23}); });</script></li><li class=gbt><a class=gbgt id=gbztm href=\"https://www.google.com/intl/en/options/\"  aria-haspopup=true aria-owns=gbd><span class=gbtb2></span><span id=gbztms class=\"gbts gbtsa\"><span id=gbztms1>More</span><span class=gbma></span></span></a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gbztm').addEventListener('click', function clickHandler() { gbar.tg(event,this); });</script><div class=gbm id=gbd aria-owner=gbztm><div id=gbmmb class=\"gbmc gbsb gbsbis\"><ol id=gbmm class=\"gbmcc gbsbic\"><li class=gbmtc><a class=\"gbmt gbp1 gbm0l\" id=gb_49 href=\"https://drive.google.com/?tab=oo\">Drive</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_49').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:49});; });</script></li><li class=gbmtc><a target=_blank class=gbmt id=gb_24 href=\"https://www.google.com/calendar?tab=oc\">Calendar</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_24').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:24});; });</script></li><li class=gbmtc><a target=_blank class=gbmt id=gb_51 href=\"https://translate.google.com/?hl=en&tab=oT\">Translate</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_51').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:51});; });</script></li><li class=gbmtc><a target=_blank class=gbmt id=gb_17 href=\"http://www.google.com/mobile/?hl=en&tab=oD\">Mobile</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_17').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:17});; });</script></li><li class=gbmtc><a target=_blank class=gbmt id=gb_10 href=\"https://books.google.com/bkshp?hl=en&tab=op\">Books</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_10').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:10});; });</script></li><li class=gbmtc><a target=_blank class=gbmt id=gb_6 href=\"http://www.google.com/shopping?hl=en&tab=of\">Shopping</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_6').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:6});; });</script></li><li class=gbmtc><a target=_blank class=gbmt id=gb_30 href=\"https://www.blogger.com/?tab=oj\">Blogger</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_30').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:30});; });</script></li><li class=gbmtc><a target=_blank class=gbmt id=gb_27 href=\"https://www.google.com/finance?tab=oe\">Finance</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_27').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:27});; });</script></li><li class=gbmtc><a target=_blank class=gbmt id=gb_31 href=\"https://photos.google.com/?tab=oq&pageId=none\">Photos</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_31').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:31});; });</script></li><li class=gbmtc><a target=_blank class=gbmt id=gb_12 href=\"http://video.google.com/?hl=en&tab=ov\">Videos</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_12').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:12});; });</script></li><li class=gbmtc><a target=_blank class=gbmt id=gb_25 href=\"https://docs.google.com/document/?usp=docs_alc\">Docs</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gb_25').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:25});; });</script></li><li class=gbmtc><div class=\"gbmt gbmh\"></div></li><li class=gbmtc><a target=_blank  href=\"https://www.google.com/intl/en/options/\" class=gbmt>Even more &raquo;</a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.querySelector('li > a.gbmt').addEventListener('click', function clickHandler() { gbar.logger.il(1,{t:66});; });</script></li></ol><div class=gbsbt></div><div class=gbsbb></div></div></div></li></ol></div><div id=gbg><h2 class=gbxx>Account Options</h2><span class=gbtcb></span><ol class=gbtc><li class=gbt><a target=_top href=\"https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://drive.google.com/uc%3Fexport%3Ddownload%26id%3D11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY&service=writely\" onclick=\"gbar.logger.il(9,{l:'i'})\" id=gb_70 class=gbgt><span class=gbtb2></span><span id=gbgs4 class=gbts><span id=gbi4s1>Sign in</span></span></a></li><li class=\"gbt gbtb\"><span class=gbts></span></li><li class=gbt><a class=gbgt id=gbg5 href=\"http://www.google.com/preferences?hl=en\" title=\"Options\" aria-haspopup=true aria-owns=gbd5><span class=gbtb2></span><span id=gbgs5 class=gbts><span id=gbi5></span></span></a><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>document.getElementById('gbg5').addEventListener('click', function clickHandler() { gbar.tg(event,this); });</script><div class=gbm id=gbd5 aria-owner=gbg5><div class=gbmc><ol id=gbom class=gbmcc><li class=\"gbkc gbmtc\"><a target=\"_self\" class=gbmt href=\"/settings?hl=en_US\">Settings</a></li><li class=\"gbkc gbmtc\"><a target=_blank  class=gbmt href=\"//support.google.com/drive/?p=web_home&hl=en_US\">Help</a></li></ol></div></div></li></ol></div></div><div id=gbx3></div><div id=gbx4></div><script nonce='7+QFZRHv3R6ExbW03Ty1Jg458l4'>window.gbar&&gbar.elp&&gbar.elp()</script></div><div class=\"uc-main\"><div id=\"uc-dl-icon\" class=\"image-container\"><div class=\"drive-sprite-aux-download-file\"></div></div><div id=\"uc-text\"><p class=\"uc-warning-caption\">Google Drive can't scan this file for viruses.</p><p class=\"uc-warning-subcaption\"><span class=\"uc-name-size\"><a href=\"https://drive.google.com/open?id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY\">Copy of Mad Max Fury Road 2015 HD 720p.mp4</a> (922M)</span> is too large for Google to scan for viruses. Would you still like to download this file?</p><a id=\"uc-download-link\" class=\"goog-inline-block jfk-button jfk-button-action\" href=\"/uc?export=download&amp;confirm=wNxV&amp;id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY\">Download anyway</a></div></div><div class=\"uc-footer\"><hr class=\"uc-footer-divider\">&copy; 2018 Google - <a class=\"goog-link\" href=\"//support.google.com/drive/?p=web_home\">Help</a> - <a class=\"goog-link\" href=\"//support.google.com/drive/bin/answer.py?hl=en_US&amp;answer=2450387\">Privacy & Terms</a></div></body></html>";
 
-            String jgcode=jGDriveObject.JGConfirmCode(jgsource2, 4);
+            String jgcode=jGDriveObject.JGConfirmCode(jgsource, 4);
             System.out.println("jgcode--" + jgcode + "--3--");
 
             SocketConnection sc= new SocketConnection();
@@ -315,6 +317,21 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
         }
     }*/
+    public static void updateLogcat(String jgsource){
+        System.out.println("jGSourceN2457--" + jgsource + "--3--");
+
+    }
+    public boolean isJGSourceUp(JGDriveId jGDriveObject){
+        boolean jgsup=false;
+        if(!(jGDriveObject.jgsource==null)) {
+            System.out.println("jGSourceN2458--" + jGDriveObject.jgsource + "--3--");
+            jgsup=true;
+        }
+        else{
+            isJGSourceUp(jGDriveObject);
+        }
+        return jgsup;
+    }
 
     private void checkConnectivity(View v) {
 
@@ -439,12 +456,17 @@ public class MainActivity extends AppCompatActivity {
         Intent BrowserIntent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.google.com"));
         startActivity(BrowserIntent);
     }
+    /*
+    private class MyTask extends AsyncTask<Void, Void, Void>{
+        private String gurlN=null;
 
-    public class MyTask extends AsyncTask<Void, Void, Void>{
-        private String gurlN="https://drive.google.com/uc?export=download&id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY";
-        /*MyTask(String gurl){
+        public MyTask(){
+            gurlN="https://drive.google.com/uc?export=download&id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY";
+        }
+
+        public MyTask(String gurl){
             gurlN=gurl;
-        }*/
+        }
 
 
         @Override
@@ -486,10 +508,10 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
                 jgsource =e.toString();
             }
-
+            System.out.println("jGSourceN--" + jgsource + "--3--");
             return null;
         }
-        /*
+
         @Override
         protected void onPreExecute() {
 
@@ -499,7 +521,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             //N.s(MainActivity.this, "All Items were added succesfully");
+            textMsg.setText(jgsource);
+            textPrompt.setText("Finished");
             super.onPostExecute(aVoid);
-        }*/
-    }
+        }
+    }*/
 }
