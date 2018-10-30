@@ -10,16 +10,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class JGDriveId {
     public String jgsource=null;
+    public String jlinksource=null;
+    public String location=null;
     public String JDriveId(String gurl) throws UnsupportedEncodingException, MalformedURLException {
         String gid, start, end=""; int ini,len; Map<String, String> parts;
         int i1 = gurl.indexOf("/edit");
@@ -56,18 +68,101 @@ public class JGDriveId {
 
 
     @SuppressLint("StaticFieldLeak")
-    public String jGSource(String gid){
+    public String jGSource(String gurl, String gid){
 
-        String gurlN="https://drive.google.com/uc?export=download&id=" + gid;
+        String gurlN=gurl+"&id="+ gid;
 
-        new MyTask(gurlN).execute();
+        new MyTask(gurlN,0).execute();
         int i = 0;
-        while( !isJGSourceUpOrDown(this) ) {
+        while( !isJGSourceUpOrDown(this,0) ) {
             i++;
-            System.out.println("Vlera i-se: " + i);
         }
 
         return jgsource;
+    }
+
+    public String getJLink(String gurl, String gid, String jgcode){
+        String jgurl = null;
+        String gurlN=gurl+"&id="+gid+"&confirm="+jgcode;
+
+
+        String urlLink="http://www.google.com";
+        //URL url = null;
+
+
+
+
+        /*
+        try {
+
+            URL obj = new URL("https://drive.google.com/uc?export=download&id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY");
+            URLConnection conn = obj.openConnection();
+            Map<String, List<String>> map = conn.getHeaderFields();
+
+            System.out.println("Printing Response Header...\n");
+
+            for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+                System.out.println("Key : " + entry.getKey()
+                        + " ,Value : " + entry.getValue());
+            }
+
+            System.out.println("\nGet Response Header By Key ...\n");
+            String server = conn.getHeaderField("Server");
+
+            if (server == null) {
+                System.out.println("Key 'Server' is not found!");
+            } else {
+                System.out.println("Server - " + server);
+            }
+
+            System.out.println("\n Done");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        */
+
+
+
+        /*
+        try {
+            url = new URL(urlLink);
+            HttpURLConnection conn  = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuffer sb = new StringBuffer();
+            String line;
+            String resultText = "";
+
+            while((line = in.readLine())!= null){
+                sb.append(line);
+                resultText += line;
+            }
+            in.close();
+            System.out.println(sb.toString());
+            jlinksource = resultText;
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
+
+
+        /*
+        new MyTask(gurlN,1).execute();
+        int i = 0;
+        while( !isJGSourceUpOrDown(this,1) ) {
+            i++;
+        }
+        */
+        new MyTaskN(gurlN, jgcode).execute();
+
+        return jlinksource;
+        //return jgurl;
     }
 
     public boolean isJGSourceUp(JGDriveId jGDriveObject){
@@ -82,14 +177,23 @@ public class JGDriveId {
         return jgsup;
     }
 
-    public boolean isJGSourceUpOrDown(JGDriveId jGDriveObject){
+    public boolean isJGSourceUpOrDown(JGDriveId jGDriveObject, int ini){
         boolean jgsup=false;
-        if(!(jGDriveObject.jgsource==null)) {
-            System.out.println("jGSourceN3000--" + jGDriveObject.jgsource + "--3--");
-            jgsup = true;
+        if(ini==0){
+            if(!(jGDriveObject.jgsource==null)) {
+                jgsup = true;
+            }
+            else{
+                jgsup = false;
+            }
         }
-        else{
-            jgsup = false;
+        else if(ini==1){
+            if(!(jGDriveObject.jlinksource==null)) {
+                jgsup = true;
+            }
+            else{
+                jgsup = false;
+            }
         }
         return jgsup;
     }
@@ -161,58 +265,61 @@ public class JGDriveId {
         }
         return query_pairs;
     }
-    /*
-    public class MyTask extends AsyncTask<Void, Void, Void>{
-        private String gurlN="https://drive.google.com/uc?export=download&id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY";
-        /*MyTask(String gurl){
-            gurlN=gurl;
+
+
+    private class MyTaskN extends AsyncTask<Void, Void, Void>{
+        private String gurlN=null;
+        private String jgcodeN;
+
+        public MyTaskN(){
+            gurlN="https://drive.google.com/uc?export=download&id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY";
         }
-        */
-        /*
+
+        public MyTaskN(String gurl, String jgcode){
+            gurlN=gurl;
+            jgcodeN=jgcode;
+        }
+
         @Override
         protected Void doInBackground(Void... voids) {
             String firstPartText="", secondPartText="";
             URL textUrl;
 
             try{
-                textUrl = new URL(gurlN);
-                InputStream inStream = textUrl.openStream();
-                InputStreamReader inStrReader = new InputStreamReader(inStream);
-                BufferedReader bufferReader = new BufferedReader(inStrReader);
-                String stringbuffer;
-                String stringText = ""; int i=0;
-                while((stringbuffer = bufferReader.readLine()) != null){
-                    int lenA= firstPartText.length();//41155
-                    int lenB= secondPartText.length();
-                    int lenC= stringbuffer.length();//200000
-                    if(lenC<200000&&lenA<41155){
-                        firstPartText += stringbuffer;
-                        System.out.println("Iterimi if: "+i+" gjatesia: 1part-"+lenA+" 2part-"+lenB+" sbuffer-"+lenC);
-                    }
-                    else{
-                        System.out.println("Iterimi else: "+i+" gjatesia: 1part-"+lenA+" 2part-"+lenB+" sbuffer-"+lenC);
-                        secondPartText += stringbuffer; }
-                    i++;
-                }
 
-                System.out.println("Vlera i-se: "+i+"textResult10:  -First Part- "+firstPartText);
-                System.out.println(" -Second Part- "+secondPartText +" -FUND");
-                stringText = firstPartText+secondPartText;
-                bufferReader.close();
-                jgsource = stringText;
-                System.out.println("textResult9: -First Part-"+firstPartText+" -Second Part- "+secondPartText +" -FUND");
+
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+                            .followRedirects(true)
+                            .followSslRedirects(false)
+                            .build();
+                    MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+                    RequestBody body = RequestBody.create(mediaType, "checkCookiesEnabled=true&checkMobileDevice=false&checkStandaloneMode=false&checkTabletDevice=false&portalAccountUsername=username&portalAccountPassword=password");
+                    Request request = new Request.Builder()
+                            .url("https://drive.google.com/uc?export=download&id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY")
+                            .post(body)
+                            .addHeader("content-type", "application/x-www-form-urlencoded")
+                            .addHeader("cache-control", "no-cache")
+                            .build();
+
+                    Response response = client.newCall(request).execute();
+                    String contentDisposition = response.header("location");
+
+
+                    location = contentDisposition;
+
 
             }catch(MalformedURLException e){
                 e.printStackTrace();
-                jgsource =e.toString();
+                location = e.toString();
+
             }catch(IOException e){
                 e.printStackTrace();
-                jgsource =e.toString();
+                location = e.toString();
+
             }
 
             return null;
-        }*/
-        /*
+        }
         @Override
         protected void onPreExecute() {
 
@@ -222,21 +329,26 @@ public class JGDriveId {
         @Override
         protected void onPostExecute(Void aVoid) {
             //N.s(MainActivity.this, "All Items were added succesfully");
+            //textMsg.setText(jgsource);
+            //textPrompt.setText("Finished");
+            MainActivity.updateLogcat(location);
             super.onPostExecute(aVoid);
         }
-    }*/
+    }
+
 
     private class MyTask extends AsyncTask<Void, Void, Void>{
         private String gurlN=null;
+        private int iniN;
 
         public MyTask(){
             gurlN="https://drive.google.com/uc?export=download&id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY";
         }
 
-        public MyTask(String gurl){
+        public MyTask(String gurl, int ini){
             gurlN=gurl;
+            iniN=ini;
         }
-
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -261,21 +373,35 @@ public class JGDriveId {
                     i++;
                 }
 
-                System.out.println("Vlera i-se: "+i+"textResult10:  -First Part- "+firstPartText);
-                System.out.println(" -Second Part- "+secondPartText +" -FUND");
                 stringText = firstPartText+secondPartText;
-                bufferReader.close();
-                jgsource = stringText;
-                System.out.println("textResult9: -First Part-"+firstPartText+" -Second Part- "+secondPartText +" -FUND");
+
+                if(iniN==0) {
+                    jgsource = stringText;
+                } else if(iniN==1){
+                    jlinksource = stringText;
+                    bufferReader.close();
+                }
 
             }catch(MalformedURLException e){
                 e.printStackTrace();
-                jgsource =e.toString();
+                if(iniN==0) {
+                    jgsource =e.toString();
+                } else if(iniN==1){
+                    jlinksource = e.toString();
+                }
             }catch(IOException e){
                 e.printStackTrace();
-                jgsource =e.toString();
+                if(iniN==0) {
+                    jgsource = e.toString();
+                } else if(iniN==1){
+                    jlinksource = e.toString();
+                }
             }
-            System.out.println("jGSourceN--" + jgsource + "--3--");
+            if(iniN==0) {
+                System.out.println("jGSourceN--" + jgsource + "--3--");
+            } else if(iniN==1){
+                System.out.println("jGSourceN--" + jlinksource + "--3--");
+            }
             return null;
         }
         @Override
