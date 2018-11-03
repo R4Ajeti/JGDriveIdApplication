@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         textPrompt.setText("Wait...");
         String gurlN="https://drive.google.com/uc?export=download&id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY";
         //new MyTask(gurlN).execute();
+        new DriveTask().execute();
         String t1=jgsource;
 
         //play a video from relative path(existing local file)
@@ -250,6 +251,11 @@ public class MainActivity extends AppCompatActivity {
             //System.out.println("jlinksource--" + jlinksource + "--3--");
 
 
+            //JGDriveStreamN DriveObject = new JGDriveStreamN("https://drive.google.com/open?id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY");
+
+            /*updateLogcatN(DriveObject.toString(), "JGDlink: ");
+            textMsg.setText("DoubleVarText: "+DriveObject.toString());*/
+            /*
             String durl="https://megadrive.co/mm9mpldt3vzm";
             JMegaDriveId jMegaDriveIdObject = new JMegaDriveId();
 
@@ -257,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("jSource232--" + jsource + "--3--");
 
             String jlinkgen=jMegaDriveIdObject.jLinkGen(jsource);
-            System.out.println("jlinkgen232--" + jlinkgen + "--3--");
+            System.out.println("jlinkgen232--" + jlinkgen + "--3--");*/
 
 
 
@@ -456,6 +462,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }*/
 
+    public class DriveTask extends AsyncTask<Void, Void, Void> {
+        String textResult="";
+        @Override
+        protected Void doInBackground(Void... params){
+
+
+            try{
+                JGDriveStreamN DriveObject = new JGDriveStreamN("https://drive.google.com/open?id=11wtw6iY4rmeoAZzhsrodhFAop8CV-kEY");
+                textResult = DriveObject.toString();
+            }catch(MalformedURLException e){
+                e.printStackTrace();
+                textResult =e.toString();
+            }catch(IOException e){
+                e.printStackTrace();
+                textResult =e.toString();
+            }
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid){
+            textPrompt.setText("Finished! dhe gjateia");
+            textMsg.setText("DoubleVarText: "+textResult);
+            super.onPostExecute(aVoid);
+        }
+    }
+
 
     public void  whenSetResponseCache_thenCorrect(TextView textMsg)
             throws IOException {
@@ -481,7 +515,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static void updateLogcat(String jgsource){
-        System.out.println("jGSourceN2460--" + jgsource + "--3--");
+        System.out.println("jGDlink2460--" + jgsource + "--3--");
+
+    }
+    public static void updateLogcatN(String jgdlink, String title){
+        System.out.println("title--" + jgdlink + "----");
 
     }
     public boolean isJGSourceUp(JGDriveId jGDriveObject){
